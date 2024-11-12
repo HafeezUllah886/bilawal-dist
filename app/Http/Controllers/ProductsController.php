@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\brands;
 use App\Models\categories;
 use App\Models\products;
 use App\Models\units;
@@ -17,7 +18,8 @@ class ProductsController extends Controller
         $items = products::all();
         $units = units::all();
         $cats = categories::orderBy('name', 'asc')->get();
-        return view('products.product', compact('items', 'units', 'cats'));
+        $brands = brands::orderBy('name', 'asc')->get();
+        return view('products.product', compact('items', 'units', 'cats', 'brands'));
     }
 
     /**

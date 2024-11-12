@@ -24,10 +24,11 @@
                             <th>#</th>
                             <th>Code</th>
                             <th>Name</th>
+                            <th>Brand</th>
                             <th>Category</th>
                             <th>Unit</th>
                             <th>TP</th>
-                            <th>Purchase Price</th>
+                            <th>P Price</th>
                             <th>WS Price</th>
                             <th>RT Price</th>
                             <th>Discount</th>
@@ -39,6 +40,7 @@
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $item->code }}</td>
                                     <td>{{ $item->name }}</td>
+                                    <td>{{ $item->brand->name }}</td>
                                     <td>{{ $item->category->name }}</td>
                                     <td>{{ $item->unit->name }}</td>
                                     <td>{{ $item->tp }}</td>
@@ -146,7 +148,7 @@
 
     <div id="new" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true"
         style="display: none;">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="myModalLabel">Create New Product</h5>
@@ -155,58 +157,89 @@
                 <form action="{{ route('product.store') }}" method="post">
                     @csrf
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label for="code">Code</label>
-                            <input type="text" name="code" required id="code" class="form-control">
-                        </div>
-                        <div class="form-group mt-2">
-                            <label for="name">Name</label>
-                            <input type="text" name="name" required id="name" class="form-control">
-                        </div>
-                        <div class="form-group mt-2">
-                            <label for="catID">Category</label>
-                           <select name="catID" id="catID" class="form-control">
-                            @foreach ($cats as $cat)
-                                <option value="{{$cat->id}}">{{$cat->name}}</option>
-                            @endforeach
-                           </select>
-                        </div>
-                        <div class="form-group mt-2">
-                            <label for="unit">Unit</label>
-                            <select name="unitID" id="unit" class="form-control">
-                                @foreach ($units as $unit)
-                                    <option value="{{ $unit->id }}">{{ $unit->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group mt-2">
-                            <label for="tp">TP</label>
-                            <input type="number" name="tp" required min="0" step="any" id="tp"
-                                class="form-control">
-                        </div>
-                        <div class="form-group mt-2">
-                            <label for="pprice">Purchase Price</label>
-                            <input type="number" step="any" name="pprice" required
-                                value="" min="0" id="pprice"
-                                class="form-control">
-                        </div>
-                        <div class="form-group mt-2">
-                            <label for="wsprice">Whole Sale Price</label>
-                            <input type="number" step="any" name="wsprice" required
-                                value="" min="0" id="wsprice"
-                                class="form-control">
-                        </div>
-                        <div class="form-group mt-2">
-                            <label for="price">Retail Price</label>
-                            <input type="number" step="any" name="price" required
-                                value="" min="0" id="price"
-                                class="form-control">
-                        </div>
-                        <div class="form-group mt-2">
-                            <label for="discount">Discount</label>
-                            <input type="number" step="any" name="discount" required
-                                value="0" min="0"
-                                id="discount" class="form-control">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="code">Code</label>
+                                    <input type="text" name="code" required id="code" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" name="name" required id="name" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="brandID">Brand</label>
+                                   <select name="brandID" id="brandID" class="form-control">
+                                    @foreach ($brands as $brand)
+                                        <option value="{{$brand->id}}">{{$brand->name}}</option>
+                                    @endforeach
+                                   </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="catID">Category</label>
+                                   <select name="catID" id="catID" class="form-control">
+                                    @foreach ($cats as $cat)
+                                        <option value="{{$cat->id}}">{{$cat->name}}</option>
+                                    @endforeach
+                                   </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="unit">Unit</label>
+                                    <select name="unitID" id="unit" class="form-control">
+                                        @foreach ($units as $unit)
+                                            <option value="{{ $unit->id }}">{{ $unit->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="tp">TP</label>
+                                    <input type="number" name="tp" required min="0" step="any" id="tp"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="pprice">Purchase Price</label>
+                                    <input type="number" step="any" name="pprice" required
+                                        value="" min="0" id="pprice"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="wsprice">Whole Sale Price</label>
+                                    <input type="number" step="any" name="wsprice" required
+                                        value="" min="0" id="wsprice"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="price">Retail Price</label>
+                                    <input type="number" step="any" name="price" required
+                                        value="" min="0" id="price"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="discount">Discount</label>
+                                    <input type="number" step="any" name="discount" required
+                                        value="0" min="0"
+                                        id="discount" class="form-control">
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                     <div class="modal-footer">

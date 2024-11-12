@@ -157,3 +157,17 @@ function calculateGrowthPercentage($oldValue, $newValue) {
     $growthPercentage = (($newValue - $oldValue) / $oldValue) * 100;
     return $growthPercentage;
 }
+
+function projectNameAuth()
+{
+    return "Bilawal Distribution";
+}
+
+function projectNameHeader()
+{
+    return "BILAWAL DISTRIBUTION";
+}
+function projectNameShort()
+{
+    return "BD";
+}

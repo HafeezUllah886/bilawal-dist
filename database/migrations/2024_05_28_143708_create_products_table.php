@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('code')->unique();
             $table->string('name')->unique();
             $table->foreignId('catID')->constrained('categories', 'id');
+            $table->foreignId('brandID')->constrained('brands', 'id');
             $table->foreignId('unitID')->constrained('units', 'id');
             $table->float('pprice');
             $table->float('price');
