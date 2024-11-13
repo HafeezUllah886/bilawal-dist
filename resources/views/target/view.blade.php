@@ -37,6 +37,7 @@
                                 </div>
                             </div>
                             <!--end card-header-->
+                            <!--end card-header-->
                         </div><!--end col-->
                         <div class="col-lg-12">
                             <div class="card-body p-4">
